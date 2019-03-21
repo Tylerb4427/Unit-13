@@ -24,20 +24,22 @@ public class WordSearch
         boolean isFound=false;
         
         for(int r=0;r<m.length;r++)
-            for(int c=0;c<m[r].length-word.length();c++)
-                if(checkRight(word,r,c))
+            for(int c=0;c<m[r].length+1-word.length();c++)
+                if(checkRight(word,r,c)||checkLeft(word,r,c))
                     isFound=true;
+        
         
         for(int c=0;c<m.length;c++)
-            for(int r=0;r<m[c].length-word.length();r++)
-                if(checkDown(word,r,c))
+            for(int r=0;r<m[c].length+1-word.length();r++)
+                if(checkDown(word,r,c)||checkUp(word,r,c))
                     isFound=true;
+
         
-        for(int c=0;c<m.length;c++)
-            for(int r=0;r<m[c].length-word.length();r++)
-                if(checkUp(word,r,c))
+        for(int c=0;c<m.length+1-(word.length());c++)
+            for(int r=0;r<m[c].length+1-(word.length());r++)
+                if(checkDiagUpLeft(word,r,c)||checkDiagDownLeft(word,r,c)||checkDiagUpRight(word,r,c)||checkDiagDownRight(word,r,c))
                     isFound=true;
-        
+
         return isFound;
     }
 
@@ -51,13 +53,16 @@ public class WordSearch
 
 	public boolean checkLeft(String w, int r, int c)
 	{
-		return false;
+        for(int i=0;i<w.length();i++)
+            if(!(m[r][m[r].length-(c+i+1)].equals(""+w.charAt(i))))
+                return false;
+        return true;
 	}
 
 	public boolean checkUp(String w, int r, int c)
 	{
         for(int i=0;i<w.length();i++)
-            if(!(m[r][c-i].equals(""+w.charAt(i))))
+            if(!(m[m.length-(r+i+1)][c].equals(""+w.charAt(i))))
                 return false;
         return true;
 	}
@@ -72,22 +77,34 @@ public class WordSearch
 
 	public boolean checkDiagUpRight(String w, int r, int c)
 	{
-		return false;
+        for(int i=0;i<w.length();i++)
+            if(!(m[m.length-(r+i+1)][c+i].equals(""+w.charAt(i))))
+                return false;
+        return true;
 	}
 
 	public boolean checkDiagUpLeft(String w, int r, int c)
 	{
-		return false;
+        for(int i=0;i<w.length();i++)
+            if(!(m[m.length-(r+i+1)][m[r+i].length-(c+i+1)].equals(""+w.charAt(i))))
+                return false;
+        return true;
 	}
 
 	public boolean checkDiagDownLeft(String w, int r, int c)
    {
-		return false;
+        for(int i=0;i<w.length();i++)
+            if(!(m[r+i][m[r+i].length-(c+i+1)].equals(""+w.charAt(i))))
+                return false;
+        return true;
 	}
 
 	public boolean checkDiagDownRight(String w, int r, int c)
 	{
-		return false;
+        for(int i=0;i<w.length();i++)
+            if(!(m[r+i][c+i].equals(""+w.charAt(i))))
+                return false;
+        return true;
 	}
 
     public String toString()
