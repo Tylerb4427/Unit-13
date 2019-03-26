@@ -1,3 +1,5 @@
+package WordSortTwo;
+
 //(c) A+ Computer Science
 //www.apluscompsci.com
 //Name -
@@ -12,15 +14,20 @@ public class WordSortTwo
 
 	public WordSortTwo(String sentence)
 	{
+            wordRay= sentence.split(" ");
 	}
 
 	public void sort()
 	{
+            Arrays.sort(wordRay);
 	}
 
 	public String toString()
 	{
 		String output="";
+                for(String i:wordRay)
+                    output+=i+"\n";
 		return output+"\n\n";
+                
 	}
 }

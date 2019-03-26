@@ -14,17 +14,17 @@ public class NumberSorter {
 
     private static int getNumDigits(int number) {
         int count = 0;
-        for(int i=0;i<20;i++)
-            if(number<Math.pow(10,i))
+        for (int i = 0; i < 20; i++) 
+            if (number < Math.pow(10, i)) 
                 return i;
         return 0;
     }
 
     public static int[] getSortedDigitArray(int number) {
         int[] sorted = new int[getNumDigits(number)];
-        for(int i=1;i<sorted.length;i++)
-            sorted[i-1]=(number%(int)Math.pow(10,sorted.length-i+1))/(int)Math.pow(10,sorted.length-i);
-        sorted[sorted.length-1]=number%10;
+        for (int i = 1; i < sorted.length; i++) 
+            sorted[i - 1] = (number % (int) Math.pow(10, sorted.length - i + 1)) / (int) Math.pow(10, sorted.length - i);
+        sorted[sorted.length - 1] = number % 10;
         Arrays.sort(sorted);
         return sorted;
     }
